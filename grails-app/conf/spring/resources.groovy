@@ -3,6 +3,7 @@ import diplom.NewsServiceImplService
 import diplom.RoleServiceImplService
 import diplom.ScheduleServiceImplService
 import diplom.UserServiceImplService
+import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder
 
 // Place your Spring DSL code here
 beans = {
@@ -21,4 +22,7 @@ beans = {
     userService(UserServiceImplService) {
         ref('userService')
     }
+
+    //disables password encoder
+    passwordEncoder(PlaintextPasswordEncoder)
 }

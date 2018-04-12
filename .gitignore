@@ -13,3 +13,4 @@ out/
 gradle/
 gradlew
 gradlew.bat
+.asscache
