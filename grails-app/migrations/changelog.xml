@@ -162,4 +162,51 @@
     <changeSet author="sdoro (generated)" id="1523432972003-13">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="FK_it77eq964jhfqtu54081ebtio" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
     </changeSet>
+
+    <changeSet id="1-insert" author="Stas Dorozhko">
+        <insert tableName="role">
+            <column name="authority">ROLE_ADMIN</column>
+            <column name="version">1</column>
+        </insert>
+        <insert tableName="role">
+            <column name="authority">ROLE_USER</column>
+            <column name="version">1</column>
+        </insert>
+
+        <insert tableName="user">
+            <column name="version">1</column>
+            <column name="name">adminName</column>
+            <column name="second_name">adminSecondName</column>
+            <column name="surname">adminSurname</column>
+            <column name="username">admin</column>
+            <column name="password"><!--todo generate password-->password</column>
+            <column name="account_expired">false</column>
+            <column name="account_locked">false</column>
+            <column name="enabled">true</column>
+            <column name="password_expired">false</column>
+            <column name="email">admin@test.com</column>
+        </insert>
+        <insert tableName="user">
+            <column name="version">1</column>
+            <column name="name">userName</column>
+            <column name="second_name">userSecondName</column>
+            <column name="surname">userSurname</column>
+            <column name="username">user</column>
+            <column name="password"><!--todo generate password-->password</column>
+            <column name="account_expired">false</column>
+            <column name="account_locked">false</column>
+            <column name="enabled">true</column>
+            <column name="password_expired">false</column>
+            <column name="email">user@test.com</column>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id">1</column>
+            <column name="role_id">1</column>
+        </insert>
+        <insert tableName="user_role">
+            <column name="user_id">2</column>
+            <column name="role_id">2</column>
+        </insert>
+    </changeSet>
 </databaseChangeLog>
