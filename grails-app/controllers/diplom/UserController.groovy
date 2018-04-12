@@ -8,8 +8,6 @@ class UserController {
 
     UserService userService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer page, Integer max) {
         List<User> users = userService.list(page, max)
         Integer userCount = userService.count()
@@ -39,7 +37,7 @@ class UserController {
     def update(User user) {
         User updatedUser = userService.update(user)
 
-        respond(updatedUser, status: CREATED, view: "/user/show")
+        respond(updatedUser, status: OK, view: "/user/show")
     }
 
     @Transactional

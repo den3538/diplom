@@ -8,8 +8,6 @@ class NewsController {
 
     NewsService newsService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer page, Integer max) {
         List<News> newsList = newsService.list(page, max)
         Long newsCount = newsService.count()

@@ -8,8 +8,6 @@ class FaqController {
 
     FaqService faqService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer page, Integer max) {
         List<Faq> faqList = faqService.list(page, max)
         Long faqCount = faqService.count()
@@ -46,6 +44,7 @@ class FaqController {
     def delete(Faq faq) {
         faqService.delete(faq)
 
+//        respond([status: NO_CONTENT, view: "/faq/index"])
         redirect(controller: "faq", action: "index", method: "GET", status: NO_CONTENT)
     }
 }

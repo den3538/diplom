@@ -8,8 +8,6 @@ class ScheduleController {
 
     ScheduleService scheduleService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer page, Integer max) {
         List<Schedule> schedules = scheduleService.list(page, max)
         Integer scheduleCount = scheduleService.count()

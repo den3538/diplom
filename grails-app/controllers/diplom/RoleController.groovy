@@ -8,8 +8,6 @@ class RoleController {
 
     RoleService roleService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer page, Integer max) {
         List<Role> roles = roleService.list(page, max)
         Integer roleCount = roleService.count()
