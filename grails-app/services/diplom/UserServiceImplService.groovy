@@ -39,4 +39,9 @@ class UserServiceImplService implements UserService {
     Integer count() {
         User.count
     }
+
+    @Override
+    User get(Long id) {
+        User.get(id)
+    }
 }

@@ -5,6 +5,8 @@ import grails.transaction.Transactional
 @Transactional
 class FaqServiceImplService implements FaqService {
 
+    SecurityService securityService
+
     @Override
     List<Faq> list(final Integer page, final Integer max) {
         Integer localPage = page ?: 0
@@ -14,12 +16,14 @@ class FaqServiceImplService implements FaqService {
 
     @Override
     Faq save(Faq faq) {
+        faq.author = securityService.getAuthorizedUser()
         faq.save()
     }
 
     @Override
     Faq update(Faq faq) {
         checkThatFaqExists(faq.id)
+        checkIfAuthor(faq)
         faq.save()
     }
 
@@ -29,9 +33,16 @@ class FaqServiceImplService implements FaqService {
         }
     }
 
+    private void checkIfAuthor(Faq faq) {
+        if (faq.author.id != securityService.getAuthorizedUser().id) {
+            //todo throw exception
+        }
+    }
+
     @Override
     void delete(Faq faq) {
         checkThatFaqExists(faq.id)
+        checkIfAuthor(faq)
         faq.delete()
     }
 

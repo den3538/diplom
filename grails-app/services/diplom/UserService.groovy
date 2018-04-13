@@ -10,4 +10,6 @@ interface UserService {
     void delete(User user)
 
     Integer count()
+
+    User get(Long id)
 }
