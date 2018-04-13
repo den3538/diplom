@@ -25,7 +25,7 @@ class ScheduleServiceImplService implements ScheduleService {
 
     private void checkIfExists(Long id) {
         if (!Schedule.exists(id)) {
-            //todo throw exception
+            throw new CantFindException("Can't find requested schedule!")
         }
     }
 

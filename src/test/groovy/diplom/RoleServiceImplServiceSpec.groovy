@@ -47,7 +47,7 @@ class RoleServiceImplServiceSpec extends Specification {
             saved == role
     }
 
-    def "should update news"() {
+    def "should update role"() {
         given:
             Role role = new Role(authority: "ROLE_TEST").save()
             role.authority = "ROLE_NEW"
@@ -56,6 +56,13 @@ class RoleServiceImplServiceSpec extends Specification {
         then:
             updated
             updated == role
+    }
+
+    def "should throw CantFindException"() {
+        when:
+            service.update(new Role())
+        then:
+            thrown(CantFindException)
     }
 
     def "should delete news"() {

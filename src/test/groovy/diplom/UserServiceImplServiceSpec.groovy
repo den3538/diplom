@@ -57,13 +57,20 @@ class UserServiceImplServiceSpec extends Specification {
 
     def "should update news"() {
         given:
-            User user = new User(username: "test1", email: "test1@test.com", name: "test", secondName: "test", surname: "test", password: "test")
+            User user = new User(username: "test1", email: "test1@test.com", name: "test", secondName: "test", surname: "test", password: "test").save()
             user.email = "realEmail@real.com"
         when:
             User updated = service.update(user)
         then:
             updated
             updated == user
+    }
+
+    def "should throw CantFindException"() {
+        when:
+            service.update(new User())
+        then:
+            thrown(CantFindException)
     }
 
     def "should delete news"() {

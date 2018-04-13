@@ -30,13 +30,13 @@ class NewsServiceImplService implements NewsService {
 
     private void checkIfExists(Long id) {
         if (!News.exists(id)) {
-            //todo throw exception
+            throw new CantFindException("Can't find requested news!")
         }
     }
 
     private void checkIfAuthor(News news) {
         if (news.author.id != securityService.getAuthorizedUser().id) {
-            //todo throw exception
+            throw new CantUpdateException("You can't delete or update this news")
         }
     }
 

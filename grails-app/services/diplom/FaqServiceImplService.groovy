@@ -29,13 +29,13 @@ class FaqServiceImplService implements FaqService {
 
     private void checkThatFaqExists(Long id) {
         if (!Faq.exists(id)) {
-            //todo throw exception
+            throw new CantFindException("Can't find faq")
         }
     }
 
     private void checkIfAuthor(Faq faq) {
         if (faq.author.id != securityService.getAuthorizedUser().id) {
-            //todo throw exception
+            throw new CantUpdateException("You can't delete or update this faq")
         }
     }
 

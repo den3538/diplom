@@ -53,13 +53,20 @@ class ScheduleServiceImplServiceSpec extends Specification {
 
     def "should update news"() {
         given:
-            Schedule schedule = new Schedule(tetrameter: 1, year: 2019, fileName: "schedule")
+            Schedule schedule = new Schedule(tetrameter: 1, year: 2019, fileName: "schedule").save()
             schedule.fileName = "new filename"
         when:
             Schedule updated = service.update(schedule)
         then:
             updated
             updated == schedule
+    }
+
+    def "should throw CantFindException"() {
+        when:
+            service.update(new Schedule())
+        then:
+            thrown(CantFindException)
     }
 
     def "should delete news"() {

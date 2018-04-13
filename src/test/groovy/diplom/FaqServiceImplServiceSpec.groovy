@@ -4,7 +4,7 @@ import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.*
 
-@Mock([Faq])
+@Mock([Faq, User])
 @TestFor(FaqServiceImplService)
 class FaqServiceImplServiceSpec extends Specification {
 
@@ -79,6 +79,27 @@ class FaqServiceImplServiceSpec extends Specification {
             Faq.count == 1
             updated == faq
             updated.lastUpdated
+    }
+
+    def "should throw CantFindException"() {
+        when:
+            service.update(new Faq())
+        then:
+            thrown(CantFindException)
+    }
+
+    def "should throw CantUpdateException"() {
+        given:
+            User author = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com").save()
+            User authorized = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com").save()
+            Faq faq = new Faq(question: "test", answer: "test", author: author).save()
+            service.securityService = Mock(SecurityServiceImplService){
+                1 * getAuthorizedUser() >> authorized
+            }
+        when:
+            service.update(faq)
+        then:
+            thrown(CantUpdateException)
     }
 
     def "should delete faq"() {

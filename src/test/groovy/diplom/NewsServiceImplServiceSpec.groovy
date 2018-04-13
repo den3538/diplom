@@ -4,7 +4,7 @@ import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-@Mock([News])
+@Mock([News, User])
 @TestFor(NewsServiceImplService)
 class NewsServiceImplServiceSpec extends Specification {
 
@@ -74,6 +74,27 @@ class NewsServiceImplServiceSpec extends Specification {
         then:
             updated
             updated == news
+    }
+
+    def "should throw CantFindException"() {
+        when:
+            service.update(new News())
+        then:
+            thrown(CantFindException)
+    }
+
+    def "should throw CantUpdateException"() {
+        given:
+            User author = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com").save()
+            User authorized = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com").save()
+            News news = new News(name: "test", description: "test", content: "test", author: author).save()
+            service.securityService = Mock(SecurityServiceImplService){
+                1 * getAuthorizedUser() >> authorized
+            }
+        when:
+            service.update(news)
+        then:
+            thrown(CantUpdateException)
     }
 
     def "should delete news"() {

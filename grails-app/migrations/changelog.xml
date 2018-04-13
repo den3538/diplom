@@ -208,5 +208,22 @@
             <column name="user_id">2</column>
             <column name="role_id">2</column>
         </insert>
+
+        <insert tableName="faq">
+            <column name="version">1</column>
+            <column name="question">testA</column>
+            <column name="answer">testA</column>
+            <column name="author_id">1</column>
+            <column name="date_created" valueComputed="now()"/>
+            <column name="last_updated" valueComputed="now()"/>
+        </insert>
+        <insert tableName="faq">
+            <column name="version">1</column>
+            <column name="question">testU</column>
+            <column name="answer">testU</column>
+            <column name="author_id">2</column>
+            <column name="date_created" valueComputed="now()"/>
+            <column name="last_updated" valueComputed="now()"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

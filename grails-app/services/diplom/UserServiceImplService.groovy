@@ -25,7 +25,7 @@ class UserServiceImplService implements UserService {
 
     private void checkIfExists(Long id) {
         if (!User.exists(id)) {
-            //todo throw exception
+            throw new CantFindException("Can't find requested user!")
         }
     }
 

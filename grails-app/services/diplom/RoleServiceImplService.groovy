@@ -25,7 +25,7 @@ class RoleServiceImplService implements RoleService {
 
     private void checkIfExists(Long id) {
         if (!Role.exists(id)) {
-            //todo throw exception
+            throw new CantFindException("Can't find requested role")
         }
     }
 
