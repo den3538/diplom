@@ -1,22 +1,22 @@
 package diplom
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
 @TestFor(SecurityServiceImplService)
 class SecurityServiceImplServiceSpec extends Specification {
 
-    def setup() {
-    }
-
-    def cleanup() {
-    }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    def "should return authorized user"() {
+        given:
+            User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
+            service.springSecurityService = Mock(SpringSecurityService) {
+                1 * getCurrentUser() >> user
+            }
+        when:
+            User result = service.getAuthorizedUser()
+        then:
+            result
+            result == user
     }
 }

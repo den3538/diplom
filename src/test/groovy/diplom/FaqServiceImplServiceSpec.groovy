@@ -51,7 +51,10 @@ class FaqServiceImplServiceSpec extends Specification {
     def "should save faq"() {
         given:
             User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
-            Faq faq = new Faq(question: "test", answer: "test", author: user)
+            Faq faq = new Faq(question: "test", answer: "test")
+            service.securityService = Mock(SecurityServiceImplService) {
+                1 * getAuthorizedUser() >> user
+            }
         when:
             Faq saved = service.save(faq)
         then:
@@ -66,6 +69,9 @@ class FaqServiceImplServiceSpec extends Specification {
             User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
             Faq faq = new Faq(question: "test", answer: "test", author: user).save()
             faq.question = "new question"
+            service.securityService = Mock(SecurityServiceImplService) {
+                1 * getAuthorizedUser() >> user
+            }
         when:
             Faq updated = service.update(faq)
         then:
@@ -79,6 +85,9 @@ class FaqServiceImplServiceSpec extends Specification {
         given:
             User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
             Faq faq = new Faq(question: "test", answer: "test", author: user).save()
+            service.securityService = Mock(SecurityServiceImplService) {
+                1 * getAuthorizedUser() >> user
+            }
         when:
             service.delete(faq)
         then:

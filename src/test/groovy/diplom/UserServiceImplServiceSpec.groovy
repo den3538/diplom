@@ -86,4 +86,14 @@ class UserServiceImplServiceSpec extends Specification {
             count == 10
     }
 
+    def "should return requested user"() {
+        given:
+            User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com").save()
+        when:
+            User result = service.get(1)
+        then:
+            result
+            result == user
+    }
+
 }

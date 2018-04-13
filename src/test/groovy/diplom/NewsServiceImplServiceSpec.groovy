@@ -50,7 +50,10 @@ class NewsServiceImplServiceSpec extends Specification {
     def "should save new object"() {
         given:
             User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
-            News news = new News(name: "test", description: "test", content: "test", author: user)
+            News news = new News(name: "test", description: "test", content: "test")
+            service.securityService = Mock(SecurityServiceImplService) {
+                1 * getAuthorizedUser() >> user
+            }
         when:
             News saved = service.save(news)
         then:
@@ -63,6 +66,9 @@ class NewsServiceImplServiceSpec extends Specification {
             User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
             News news = new News(name: "test", description: "test", content: "test", author: user).save()
             news.name = "new name"
+            service.securityService = Mock(SecurityServiceImplService) {
+                1 * getAuthorizedUser() >> user
+            }
         when:
             News updated = service.update(news)
         then:
@@ -74,6 +80,9 @@ class NewsServiceImplServiceSpec extends Specification {
         given:
             User user = new User(name: "test", secondName: "test", surname: "test", username: "test", password: "test", email: "test@test.com")
             News news = new News(name: "test", description: "test", content: "test", author: user).save()
+            service.securityService = Mock(SecurityServiceImplService) {
+                1 * getAuthorizedUser() >> user
+            }
         when:
             service.delete(news)
         then:
