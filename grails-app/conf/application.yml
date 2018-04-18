@@ -71,6 +71,7 @@ grails:
             updateOnStart: true
             updateOnStartFileName: changelog.xml
         springsecurity:
+            active: false
             userLookup:
               userDomainClassName: diplom.User
               authorityJoinClassName: diplom.UserRole
