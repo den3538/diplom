@@ -14,7 +14,7 @@ class UserController {
     def index(Integer page, Integer max) {
         List<User> users = userService.list(page, max)
         Integer userCount = userService.count()
-        respond users, model: [userCount: userCount]
+        respond(users, model: [userCount: userCount])
     }
 
     @Secured(["ROLE_USER", "ROLE_ADMIN"])

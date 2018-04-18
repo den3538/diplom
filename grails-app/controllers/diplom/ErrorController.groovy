@@ -4,6 +4,10 @@ import org.springframework.http.HttpStatus
 
 class ErrorController {
 
+    private logException = { Exception exception ->
+        log.info("ErrorController", exception)
+    }
+
     def index() {
         Exception exception = request.exception.cause
 
@@ -25,9 +29,5 @@ class ErrorController {
 
     HttpStatus handleException(Exception exception) {
         HttpStatus.INTERNAL_SERVER_ERROR
-    }
-
-    private void logException(Exception exception) {
-        log.info("ErrorController", exception)
     }
 }

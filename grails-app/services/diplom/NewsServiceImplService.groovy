@@ -13,6 +13,12 @@ class NewsServiceImplService implements NewsService {
         }
     }
 
+    private checkIfAuthor = { News news ->
+        if (news.author.id != securityService.getAuthorizedUser().id) {
+            throw new CantUpdateException("You can't delete or update this news")
+        }
+    }
+
     @Override
     List<News> list(Integer page, Integer max) {
         Integer localPage = page ?: 0
@@ -23,7 +29,6 @@ class NewsServiceImplService implements NewsService {
     @Override
     News save(News news) {
         news.author = securityService.getAuthorizedUser()
-
         news.save()
     }
 
@@ -32,12 +37,6 @@ class NewsServiceImplService implements NewsService {
         checkIfExists(news.id)
         checkIfAuthor(news)
         news.save()
-    }
-
-    private void checkIfAuthor(News news) {
-        if (news.author.id != securityService.getAuthorizedUser().id) {
-            throw new CantUpdateException("You can't delete or update this news")
-        }
     }
 
     @Override

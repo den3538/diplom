@@ -14,7 +14,7 @@ class ScheduleController {
     def index(Integer page, Integer max) {
         List<Schedule> schedules = scheduleService.list(page, max)
         Integer scheduleCount = scheduleService.count()
-        respond schedules, model:[scheduleCount: scheduleCount]
+        respond(schedules, model:[scheduleCount: scheduleCount])
     }
 
     def show(Schedule schedule) {

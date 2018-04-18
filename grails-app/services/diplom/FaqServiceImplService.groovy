@@ -13,6 +13,12 @@ class FaqServiceImplService implements FaqService {
         }
     }
 
+    private checkIfAuthor = { Faq faq ->
+        if (faq.author.id != securityService.getAuthorizedUser().id) {
+            throw new CantUpdateException("You can't delete or update this faq")
+        }
+    }
+
     @Override
     List<Faq> list(final Integer page, final Integer max) {
         Integer localPage = page ?: 0
@@ -31,12 +37,6 @@ class FaqServiceImplService implements FaqService {
         checkThatFaqExists(faq.id)
         checkIfAuthor(faq)
         faq.save()
-    }
-
-    private void checkIfAuthor(Faq faq) {
-        if (faq.author.id != securityService.getAuthorizedUser().id) {
-            throw new CantUpdateException("You can't delete or update this faq")
-        }
     }
 
     @Override
