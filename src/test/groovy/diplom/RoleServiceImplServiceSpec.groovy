@@ -68,6 +68,7 @@ class RoleServiceImplServiceSpec extends Specification {
     def "should delete news"() {
         given:
             Role role = new Role(authority: "ROLE_TEST").save()
+            service.userRoleService = Mock(UserRoleServiceImplService)
         when:
             service.delete(role)
         then:

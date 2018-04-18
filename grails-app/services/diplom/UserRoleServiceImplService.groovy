@@ -5,7 +5,6 @@ import grails.transaction.Transactional
 @Transactional
 class UserRoleServiceImplService implements UserRoleService {
 
-
     @Override
     UserRole save(User user, Role role) {
         UserRole.create(user, role, true)

@@ -76,6 +76,7 @@ class UserServiceImplServiceSpec extends Specification {
     def "should delete news"() {
         given:
             User user = new User(username: "test1", email: "test1@test.com", name: "test", secondName: "test", surname: "test", password: "test").save()
+            service.userRoleService = Mock(UserRoleServiceImplService)
         when:
             service.delete(user)
         then:
