@@ -5,6 +5,7 @@ import diplom.NewsServiceImplService
 import diplom.RoleServiceImplService
 import diplom.ScheduleServiceImplService
 import diplom.SecurityServiceImplService
+import diplom.UserRoleServiceImplService
 import diplom.UserServiceImplService
 import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder
 
@@ -31,6 +32,9 @@ beans = {
     securityService(SecurityServiceImplService) {
         ref('securityService')
         springSecurityService = ref('springSecurityService')
+    }
+    userRoleService(UserRoleServiceImplService) {
+        ref('userRoleService')
     }
     //disables password encoder
     passwordEncoder(PlaintextPasswordEncoder)

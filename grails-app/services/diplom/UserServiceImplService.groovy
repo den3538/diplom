@@ -5,6 +5,14 @@ import grails.transaction.Transactional
 @Transactional
 class UserServiceImplService implements UserService {
 
+    UserRoleService userRoleService
+
+    private checkIfExists = { Long id ->
+        if (!User.exists(id)) {
+            throw new CantFindException("Can't find requested user!")
+        }
+    }
+
     @Override
     List<User> list(Integer page, Integer max) {
         Integer localPage = page ?: 0
@@ -15,23 +23,20 @@ class UserServiceImplService implements UserService {
     @Override
     User save(User user) {
         user.save()
+        //todo save userRoles too
     }
 
     @Override
     User update(User user) {
         checkIfExists(user.id)
+        //todo update userRoles
         user.save()
-    }
-
-    private void checkIfExists(Long id) {
-        if (!User.exists(id)) {
-            throw new CantFindException("Can't find requested user!")
-        }
     }
 
     @Override
     void delete(User user) {
         checkIfExists(user.id)
+        userRoleService.deleteAll(user)
         user.delete()
     }
 

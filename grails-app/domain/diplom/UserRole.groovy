@@ -9,6 +9,7 @@ import org.codehaus.groovy.util.HashCodeHelper
 @ToString(cache = true, includeNames = true, includePackage = false)
 class UserRole implements Serializable {
 
+    //todo make user-role service for deleting or creating roles for user and roles
     private static final long serialVersionUID = 1
 
     User user
