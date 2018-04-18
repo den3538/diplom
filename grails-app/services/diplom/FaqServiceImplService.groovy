@@ -7,10 +7,16 @@ class FaqServiceImplService implements FaqService {
 
     SecurityService securityService
 
+    private checkThatFaqExists = { Long id ->
+        if (!Faq.exists(id)) {
+            throw new CantFindException("Can't find faq")
+        }
+    }
+
     @Override
     List<Faq> list(final Integer page, final Integer max) {
         Integer localPage = page ?: 0
-        Integer localMax = Math.min(max ?: 10, 100)
+        Integer localMax = PageUtil.getMaxValue(max)
         Faq.list([max: localMax, offset: localPage * localMax])
     }
 
@@ -25,12 +31,6 @@ class FaqServiceImplService implements FaqService {
         checkThatFaqExists(faq.id)
         checkIfAuthor(faq)
         faq.save()
-    }
-
-    private void checkThatFaqExists(Long id) {
-        if (!Faq.exists(id)) {
-            throw new CantFindException("Can't find faq")
-        }
     }
 
     private void checkIfAuthor(Faq faq) {

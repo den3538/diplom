@@ -16,7 +16,7 @@ class UserServiceImplService implements UserService {
     @Override
     List<User> list(Integer page, Integer max) {
         Integer localPage = page ?: 0
-        Integer localMax = Math.min(max ?: 10, 100)
+        Integer localMax = PageUtil.getMaxValue(max)
         User.list([max: localMax, offset: localPage * localMax])
     }
 

@@ -32,10 +32,6 @@ class User implements Serializable {
         email blank: false //todo validate email
     }
 
-    static mapping = {
-//        password column: '`password`'
-    }
-
     Set<Role> getAuthorities() {
         (UserRole.findAllByUser(this) as List<UserRole>)*.role as Set<Role>
     }

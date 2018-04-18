@@ -16,7 +16,7 @@ class RoleServiceImplService implements RoleService {
     @Override
     List<Role> list(Integer page, Integer max) {
         Integer localPage = page ?: 0
-        Integer localMax = Math.min(max ?: 10, 100)
+        Integer localMax = PageUtil.getMaxValue(max)
         Role.list([max: localMax, offset: localPage * localMax])
     }
 

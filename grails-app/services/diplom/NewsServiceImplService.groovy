@@ -7,10 +7,16 @@ class NewsServiceImplService implements NewsService {
 
     SecurityService securityService
 
+    private checkIfExists = { Long id ->
+        if (!News.exists(id)) {
+            throw new CantFindException("Can't find requested news!")
+        }
+    }
+
     @Override
     List<News> list(Integer page, Integer max) {
         Integer localPage = page ?: 0
-        Integer localMax = Math.min(max ?: 10, 100)
+        Integer localMax = PageUtil.getMaxValue(max)
         News.list([max: localMax, offset: localPage * localMax])
     }
 
@@ -26,12 +32,6 @@ class NewsServiceImplService implements NewsService {
         checkIfExists(news.id)
         checkIfAuthor(news)
         news.save()
-    }
-
-    private void checkIfExists(Long id) {
-        if (!News.exists(id)) {
-            throw new CantFindException("Can't find requested news!")
-        }
     }
 
     private void checkIfAuthor(News news) {

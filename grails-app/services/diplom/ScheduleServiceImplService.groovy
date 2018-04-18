@@ -5,10 +5,16 @@ import grails.transaction.Transactional
 @Transactional
 class ScheduleServiceImplService implements ScheduleService {
 
+    private checkIfExists = { Long id ->
+        if (!Schedule.exists(id)) {
+            throw new CantFindException("Can't find requested schedule!")
+        }
+    }
+
     @Override
     List<Schedule> list(Integer page, Integer max) {
         Integer localPage = page ?: 0
-        Integer localMax = Math.min(max ?: 10, 100)
+        Integer localMax = PageUtil.getMaxValue(max)
         Schedule.list([max: localMax, offset: localPage * localMax])
     }
 
@@ -21,12 +27,6 @@ class ScheduleServiceImplService implements ScheduleService {
     Schedule update(Schedule schedule) {
         checkIfExists(schedule.id)
         schedule.save()
-    }
-
-    private void checkIfExists(Long id) {
-        if (!Schedule.exists(id)) {
-            throw new CantFindException("Can't find requested schedule!")
-        }
     }
 
     @Override
