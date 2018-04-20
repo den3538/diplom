@@ -39,4 +39,19 @@ class ScheduleServiceImplService implements ScheduleService {
     Integer count() {
         Schedule.count
     }
+
+    @Override
+    Schedule updateFile(Long scheduleId, Integer version, String fileName) {
+        Schedule schedule = Schedule.get(scheduleId)
+        if (!schedule) {
+            return null
+        }
+        if (schedule.version != version) {
+            log.error("versions doesn't equal")
+            //todo throw exception
+        }
+        schedule.fileName = fileName
+        schedule.save(flush: true)
+        schedule
+    }
 }

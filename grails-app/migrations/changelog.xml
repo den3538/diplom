@@ -77,9 +77,7 @@
             <column name="date_created" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="file_name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="file_name" type="VARCHAR(255)"/>
             <column name="last_updated" type="timestamp">
                 <constraints nullable="false"/>
             </column>

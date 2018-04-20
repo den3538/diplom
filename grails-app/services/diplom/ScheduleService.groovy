@@ -10,4 +10,6 @@ interface ScheduleService {
     void delete(Schedule schedule)
 
     Integer count()
+
+    Schedule updateFile(Long scheduleId, Integer version, String fileName)
 }

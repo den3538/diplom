@@ -11,7 +11,7 @@ class Schedule {
     static constraints = {
         tetrameter nullable: false, min: 1, max: 4
         year nullable: false, min: 2018
-        fileName blank: false
+        fileName nullable: true
     }
 
     static mapping = {
