@@ -25,14 +25,23 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form action="save">
-                <fieldset class="form">
-                    <f:all bean="schedule" except="fileName"/>
-                </fieldset>
+            <g:uploadForm action="save" name="save">
+                <div class="fieldcontain required">
+                    <label for="tetrameter" >Tetrameter</label>
+                    <g:textField name="tetrameter" value="${tetrameter}" required="true"/>
+                </div>
+                <div class="fieldcontain required">
+                    <label for="year" >Year</label>
+                    <g:textField name="year" value="${year}" required="true"/>
+                </div>
+                <div class="fieldcontain required">
+                    <label for="uploadedFile" >Schedule file</label>
+                    <input id="uploadedFile" type="file" name="uploadedFile" accept=".xls,.xlsx,.csv"/>
+                </div>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

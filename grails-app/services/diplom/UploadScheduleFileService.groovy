@@ -1,12 +1,14 @@
 package diplom
 
+import org.springframework.web.multipart.MultipartFile
+
 interface UploadScheduleFileService {
     /**
      * Uploads file to server
      * @param excelFileCommand
      * @return
      */
-    Schedule uploadFile(ExcelFileCommand excelFileCommand)
+    String uploadFile(MultipartFile excelFileCommand)
 
     /**
      * Loads file from server

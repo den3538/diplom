@@ -1,3 +1,5 @@
+import grails.validation.ValidationException
+
 class UrlMappings {
 
     static mappings = {
@@ -8,8 +10,8 @@ class UrlMappings {
         }
 
         "/"(view:"/index")
-        "500"(controller: "error", action: "index")
-//        "500"(view:'/error')
         "404"(view:'/notFound')
+        "500"(controller: "error", action: "handleValidationException", exception: ValidationException)
+        "500"(controller: "error", action: "index")
     }
 }

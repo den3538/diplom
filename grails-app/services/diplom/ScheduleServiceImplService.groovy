@@ -19,7 +19,8 @@ class ScheduleServiceImplService implements ScheduleService {
     }
 
     @Override
-    Schedule save(Schedule schedule) {
+    Schedule save(Integer year, Integer tetrameter, String fileName) {
+        Schedule schedule = new Schedule(year: year, tetrameter: tetrameter, fileName: fileName)
         schedule.save()
     }
 

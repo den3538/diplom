@@ -3,16 +3,17 @@ package diplom
 import grails.validation.Validateable
 import org.springframework.web.multipart.MultipartFile
 
-class ExcelFileCommand implements Validateable {
+class ScheduleCommand implements Validateable {
     private static final List<String> availableExtensions = ['xls', 'xlsx', 'csv']
 
     MultipartFile uploadedFile
-    Long id
-    Integer version
+    Integer tetrameter
+    Integer year
 
     static constraints = {
-        id nullable: false
-        version nullable: false
+        tetrameter nullable: false, min: 1, max: 4
+        year nullable: false, min: 2018
+
         uploadedFile validator: { val, obj ->
             if (val == null) {
                 return false

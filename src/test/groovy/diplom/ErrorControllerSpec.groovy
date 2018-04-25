@@ -1,5 +1,6 @@
 package diplom
 
+import diplom.error.ErrorController
 import grails.test.mixin.TestFor
 import org.springframework.http.HttpStatus
 import spock.lang.Specification

@@ -3,7 +3,7 @@ package diplom
 interface ScheduleService {
     List<Schedule> list(Integer page, Integer max)
 
-    Schedule save(Schedule schedule)
+    Schedule save(Integer year, Integer tetrameter, String fileName)
 
     Schedule update(Schedule schedule)
 

@@ -1,5 +1,6 @@
 package diplom
 
+import diplom.validator.Validate
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
@@ -28,8 +29,12 @@ class ScheduleController {
     }
 
     @Transactional
-    def save(Schedule schedule) {
-        Schedule savedSchedule = scheduleService.save(schedule)
+    def save(ScheduleCommand scheduleCommand) {
+        Validate.hasNoErrors(scheduleCommand)
+
+        String fileName = uploadScheduleFileService.uploadFile(scheduleCommand.uploadedFile)
+
+        Schedule savedSchedule = scheduleService.save(scheduleCommand.getYear(), scheduleCommand.getTetrameter(), fileName)
 
         respond(savedSchedule, status: CREATED, view: "/schedule/show")
     }
@@ -52,38 +57,6 @@ class ScheduleController {
         redirect(controller: "schedule", action: "index", method: "GET", status: NO_CONTENT)
     }
 
-    def uploadFile(ExcelFileCommand cmd) {
-        if (cmd == null) {
-            notFound()
-            return
-        }
-
-        if (cmd.hasErrors()) {
-            respond(cmd.errors, model: [schedule: cmd], view: 'editFile')
-            return
-        }
-
-        def schedule = uploadScheduleFileService.uploadFile(cmd)
-
-        if (schedule == null) {
-            notFound()
-            return
-        }
-
-        if (schedule.hasErrors()) {
-            respond(schedule.errors, model: [schedule: schedule], view: 'editFile')
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'schedule.label', default: 'Schedule'), schedule.id])
-                redirect schedule
-            }
-            '*' { respond schedule, [status: OK] }
-        }
-    }
-
     def loadFile(Schedule schedule) {
         File file = uploadScheduleFileService.loadFile(schedule)
         response.setContentType("application/octet-stream")
@@ -91,8 +64,4 @@ class ScheduleController {
         response.outputStream << file.newInputStream() // Performing a binary stream copy
     }
 
-    @Transactional(readOnly = true)
-    def editFile(Schedule schedule) {
-        respond schedule
-    }
 }

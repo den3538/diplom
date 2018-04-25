@@ -60,12 +60,12 @@ class UploadScheduleFileServiceImplService implements UploadScheduleFileService 
     }
 
     @Override
-    Schedule uploadFile(ExcelFileCommand excelFileCommand) {
+    String uploadFile(MultipartFile multipartFile) {
         String schedulePath = getSchedulePath()
         createDir(schedulePath)
-        checkIfFileNotExists(schedulePath, excelFileCommand.uploadedFile.originalFilename)
-        saveFile(schedulePath, excelFileCommand.uploadedFile)
-        scheduleService.updateFile(excelFileCommand.id, excelFileCommand.version, getRealFileName(excelFileCommand.uploadedFile))
+        checkIfFileNotExists(schedulePath, multipartFile.originalFilename)
+        saveFile(schedulePath, multipartFile)
+        getRealFileName(multipartFile)
     }
 
     @Override
