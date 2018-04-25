@@ -17,7 +17,7 @@ class ErrorController {
     def index() {
         Exception exception = request.exception.cause
 
-//        logException(exception)
+        logException(exception)
 
         String message = exception.message ?: "There are some errors. Try again later"
 
@@ -31,10 +31,6 @@ class ErrorController {
 
     private HttpStatus handleException(CantUpdateException exception) {
         HttpStatus.FORBIDDEN
-    }
-
-    private HttpStatus handleException(ValidationException exception) {
-        HttpStatus.BAD_REQUEST
     }
 
     private HttpStatus handleException(Exception exception) {

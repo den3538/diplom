@@ -57,11 +57,4 @@ class ScheduleController {
         redirect(controller: "schedule", action: "index", method: "GET", status: NO_CONTENT)
     }
 
-    def loadFile(Schedule schedule) {
-        File file = uploadScheduleFileService.loadFile(schedule)
-        response.setContentType("application/octet-stream")
-        response.setHeader("Content-disposition", "attachment;filename=${file.getName()}")
-        response.outputStream << file.newInputStream() // Performing a binary stream copy
-    }
-
 }

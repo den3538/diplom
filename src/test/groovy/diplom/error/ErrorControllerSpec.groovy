@@ -1,6 +1,7 @@
-package diplom
+package diplom.error
 
-import diplom.error.ErrorController
+import diplom.CantFindException
+import diplom.CantUpdateException
 import grails.test.mixin.TestFor
 import org.springframework.http.HttpStatus
 import spock.lang.Specification

@@ -43,12 +43,13 @@ class ScheduleServiceImplServiceSpec extends Specification {
 
     def "should save new object"() {
         given:
-            Schedule schedule = new Schedule(tetrameter: 1, year: 2019, fileName: "schedule")
         when:
-            Schedule saved = service.save(schedule)
+            Schedule saved = service.save(2020, 1, "newFile.xls")
         then:
             Schedule.count == 1
-            saved == schedule
+            saved.year == 2020
+            saved.tetrameter == 1
+            saved.fileName == "newFile.xls"
     }
 
     def "should update news"() {
