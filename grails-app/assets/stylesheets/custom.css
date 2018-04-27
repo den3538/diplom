@@ -1,0 +1,26 @@
+.content {
+    background-color: white;
+}
+
+.main-page-news-offset-top {
+    margin-top: 1em;
+}
+
+.navigation-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.main-page-news-title {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+}
+
+nav div ul:last-child {
+    list-style: none;
+    float: right;
+}
+
+.news-item {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}

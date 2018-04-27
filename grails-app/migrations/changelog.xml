@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="Стас (generated)" id="1524078030507-1">
+    <changeSet author="sdoro (generated)" id="1524837965177-1">
         <createTable tableName="faq">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="faqPK"/>
@@ -25,7 +25,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-2">
+    <changeSet author="sdoro (generated)" id="1524837965177-2">
         <createTable tableName="news">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="newsPK"/>
@@ -51,9 +51,25 @@
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="photo_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-3">
+    <changeSet author="sdoro (generated)" id="1524837965177-3">
+        <createTable tableName="photo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="photoPK"/>
+            </column>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file" type="BLOB(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="sdoro (generated)" id="1524837965177-4">
         <createTable tableName="role">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="rolePK"/>
@@ -66,7 +82,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-4">
+    <changeSet author="sdoro (generated)" id="1524837965177-5">
         <createTable tableName="schedule">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="schedulePK"/>
@@ -89,7 +105,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-5">
+    <changeSet author="sdoro (generated)" id="1524837965177-6">
         <createTable tableName="user">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="userPK"/>
@@ -129,7 +145,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-6">
+    <changeSet author="sdoro (generated)" id="1524837965177-7">
         <createTable tableName="user_role">
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -139,25 +155,28 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-7">
+    <changeSet author="sdoro (generated)" id="1524837965177-8">
         <addPrimaryKey columnNames="user_id, role_id" constraintName="user_rolePK" tableName="user_role"/>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-8">
+    <changeSet author="sdoro (generated)" id="1524837965177-9">
         <addUniqueConstraint columnNames="authority" constraintName="UC_ROLEAUTHORITY_COL" tableName="role"/>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-9">
+    <changeSet author="sdoro (generated)" id="1524837965177-10">
         <addUniqueConstraint columnNames="username" constraintName="UC_USERUSERNAME_COL" tableName="user"/>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-10">
+    <changeSet author="sdoro (generated)" id="1524837965177-11">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="faq" constraintName="FK_2015mr4em1d3aka3d6k3ebox2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-11">
+    <changeSet author="sdoro (generated)" id="1524837965177-12">
         <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="news" constraintName="FK_4bvv8clo6pxkh0vjs9m5jrs9c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-12">
+    <changeSet author="sdoro (generated)" id="1524837965177-13">
+        <addForeignKeyConstraint baseColumnNames="photo_id" baseTableName="news" constraintName="FK_8w7j88fegpay3cmqqt95vynji" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="photo"/>
+    </changeSet>
+    <changeSet author="sdoro (generated)" id="1524837965177-14">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="FK_apcc8lxk2xnug8377fatvbn04" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet author="Стас (generated)" id="1524078030507-13">
+    <changeSet author="sdoro (generated)" id="1524837965177-15">
         <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="FK_it77eq964jhfqtu54081ebtio" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
     </changeSet>
 </databaseChangeLog>

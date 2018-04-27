@@ -33,6 +33,9 @@ beans = {
         ref('uploadScheduleFileService')
         scheduleService = ref('scheduleService')
     }
+    imageService(ImageServiceImplService){
+        ref('imageService')
+    }
     //disables password encoder
     passwordEncoder(PlaintextPasswordEncoder)
 }

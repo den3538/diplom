@@ -1,7 +1,7 @@
 package diplom
 
 interface NewsService {
-    List<News> list(Integer page, Integer max)
+    List<News> list(Integer offset, Integer max)
 
     News save(News news)
 

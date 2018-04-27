@@ -20,10 +20,10 @@ class NewsServiceImplService implements NewsService {
     }
 
     @Override
-    List<News> list(Integer page, Integer max) {
-        Integer localPage = page ?: 0
+    List<News> list(Integer offset, Integer max) {
+        Integer localOffset = offset ?: 0
         Integer localMax = PageUtil.getMaxValue(max)
-        News.list([max: localMax, offset: localPage * localMax])
+        News.list([max: localMax, offset: localOffset])
     }
 
     @Override

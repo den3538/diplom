@@ -9,7 +9,7 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+        "/"(redirect: "/news")
         "404"(view:'/notFound')
         "500"(controller: "error", action: "handleValidationException", exception: ValidationException)
         "500"(controller: "error", action: "index")
