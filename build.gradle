@@ -89,6 +89,9 @@ dependencies {
 
     //security
     compile 'org.grails.plugins:spring-security-core:3.1.2'
+
+    //cookie
+    compile 'org.grails.plugins:grails-cookie:2.0.3'
 }
 
 task wrapper(type: Wrapper) {

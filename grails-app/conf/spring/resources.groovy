@@ -1,6 +1,8 @@
 package spring
 
 import diplom.*
+import diplom.i18n.CustomLocaleResolver
+import org.grails.web.i18n.ParamsAwareLocaleChangeInterceptor
 import org.springframework.security.authentication.encoding.PlaintextPasswordEncoder
 
 // Place your Spring DSL code here
@@ -36,6 +38,7 @@ beans = {
     imageService(ImageServiceImplService){
         ref('imageService')
     }
+    localeResolver(CustomLocaleResolver)
     //disables password encoder
     passwordEncoder(PlaintextPasswordEncoder)
 }
