@@ -11,7 +11,7 @@
                 <div class="col-lg-4 col-md-4">
                     <img  class="card-img" src="${createLink(controller: "image", action: "get", params: [id: news.photo.id])}" alt="${message(code:'image.cant.upload',default:"Can't upload an image.")}"/>
                 </div>
-                <div class="col-lg-offset-1 col-md-offset-1"></div>
+                <div class="offset-lg-1 offset-md-1"></div>
                 <div class="col-lg-6 col-md-6">
                     <div class="row align-items-start align-self-start">
                         <h3>${news.name}</h3>
